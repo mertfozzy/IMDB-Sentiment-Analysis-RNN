@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fa26f35f-78ec-4ed7-a55d-4083731924a1" name="Default Changelist" comment="" />
+    <list default="true" id="fa26f35f-78ec-4ed7-a55d-4083731924a1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/imdb-sentiment-analysis-rnn.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/imdb-sentiment-analysis-rnn.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/imdb.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +27,28 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="imdb-sentiment-analysis-rnn" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="imdb" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="imdb-sentiment-analysis-rnn" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -60,6 +86,8 @@
       <option name="presentableId" value="Default" />
       <updated>1637739578753</updated>
       <workItem from="1637739583713" duration="1113000" />
+      <workItem from="1637742546301" duration="336000" />
+      <workItem from="1637743118602" duration="52000" />
     </task>
     <servers />
   </component>
@@ -67,6 +95,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/imdb_sentiment_analysis_rnn$imdb.coverage" NAME="imdb Coverage Results" MODIFIED="1637740694055" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/imdb_sentiment_analysis_rnn$imdb.coverage" NAME="imdb Coverage Results" MODIFIED="1637743119530" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

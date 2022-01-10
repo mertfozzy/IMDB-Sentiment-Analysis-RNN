@@ -109,9 +109,26 @@ def whatItSay(index): #default olarak 24 verdim
    print(Y_train[index])
    return decode_review
 
-decoded_review = whatItSay(6) # yorum indexi parantezden veriliyor
+decoded_review = whatItSay(36) # yorum indexi parantezden veriliyor
 
 """================================End of EDA================================"""
 
 
+"""================================Preprocess================================"""
+#preprocess ile veri seti train edilebilir hale geliyor :
 
+num_words = 15000 #kelime sayısını 15K ile sınırla
+(X_train, Y_train), (X_test, Y_test) = imdb.load_data(num_words=num_words)
+
+maxlen = 130
+X_train = pad_sequences(X_train, maxlen=maxlen)
+X_test = pad_sequences(X_test, maxlen=maxlen)
+
+print(X_train[5])
+
+for i in X_train[0:10]:
+    print(len(i))
+    
+decoded_review = whatItSay(5)
+
+"""=========================================================================="""

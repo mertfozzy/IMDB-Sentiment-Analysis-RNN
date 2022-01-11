@@ -18,7 +18,7 @@ from keras.models import Sequential
 from keras.layers.embeddings import Embedding 
 from keras.layers import SimpleRNN, Dense, Activation 
 
-warnings.filterwarnings("ignore")
+warnings.filterwarnings("ignore") # just ignores unnecessary warnings
 
 (X_train, Y_train), (X_test, Y_test) = imdb.load_data(path = "imdb.npz", 
                                                        num_words = None,
@@ -32,6 +32,7 @@ warnings.filterwarnings("ignore")
 """=========================================================================="""
 
 def testDataset():
+
     print("\nX train shape: ", X_train.shape) 
     print("\nY train shape: ", Y_train.shape)
     print("\nY train values : ", np.unique(Y_train))

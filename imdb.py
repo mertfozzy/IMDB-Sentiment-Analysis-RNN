@@ -179,8 +179,3 @@ plt.xlabel("Acc")
 plt.ylabel("Epochs")
 plt.legend()
 plt.show()
-
-
-
-
-

@@ -113,7 +113,7 @@ def whatItSay(index): #default olarak 24 verdim
 
 decoded_review = whatItSay(39) # yorum indexi parantezden veriliyor
 
-"""================================End of EDA================================"""
+"""=========================================================================="""
 
 
 
@@ -192,3 +192,4 @@ plt.xlabel("Loss")
 plt.ylabel("Epochs")
 plt.legend()
 plt.show()
+"""=========================================================================="""

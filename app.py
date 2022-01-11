@@ -75,11 +75,13 @@ def kacFarkliKelime():
 """=========================================================================="""
 
 def hangiKelime():
+
     word_index = imdb.get_word_index()
-    wordNumber = input("Kaç numaralı kelimenin karşılığını bulmak istersiniz :")
+    num = int(input("Kaç numaralı kelimenin karşılığını bulmak istersiniz : "))
     for keys, values in word_index.items(): 
-        if values == wordNumber : #integer burada veriliyor
+        if values == num : #integer burada veriliyor
             print("Girdiğiniz", values, "sayısı şu kelimeye denk geliyor: ", keys)
+            break
 
 """=========================================================================="""
 

@@ -1,25 +1,33 @@
+"""
+==============================================================================
+IMDB Sentiment Analysis Project
+
+Student Name: Mert Altuntas | Student ID:1804010005 
+==============================================================================
+
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-from scipy import stats
-from keras.datasets import imdb #dataseti import ediyoruz
-from keras.preprocessing.sequence import pad_sequences # cümle sayılarını fixlemek için
-from keras.models import Sequential # model yaratıp layerları dizi haline getireceğiz
-from keras.layers.embeddings import Embedding # yoğunluk vektörlerine dönüşüm
-from keras.layers import SimpleRNN, Dense, Activation # RNN, sınıflandırma ve sigmoid fonksiyonu
-
 import warnings
+from scipy import stats
+from keras.datasets import imdb 
+from keras.preprocessing.sequence import pad_sequences 
+from keras.models import Sequential 
+from keras.layers.embeddings import Embedding 
+from keras.layers import SimpleRNN, Dense, Activation 
+
 warnings.filterwarnings("ignore")
 
-(X_train, Y_train), (X_test, Y_test) = imdb.load_data(path = "imdb.npz", #train ve test
+(X_train, Y_train), (X_test, Y_test) = imdb.load_data(path = "imdb.npz", 
                                                        num_words = None,
-                                                       skip_top = 0, #en sık kullanılan kelimeleri ignore edelim mi?
-                                                       maxlen = None, #yorumların kelime sayısını kırpsın mı?
-                                                       seed = 113, #keras dökümanından geldi
-                                                       start_char = 1, #yorumumuzdaki hangi karakterden başlasın? (dökümandan)
-                                                       oov_char = 2, # default değeri 2
-                                                       index_from = 3) #default değeri 3
+                                                       skip_top = 0, 
+                                                       maxlen = None, 
+                                                       seed = 113, 
+                                                       start_char = 1, 
+                                                       oov_char = 2, 
+                                                       index_from = 3) 
 
 """=========================================================================="""
 
@@ -99,15 +107,66 @@ def whatItSay(index):
 
 
 """=========================================================================="""
+def machineLearning():
+    #PREPROCESS:
+    print("\n\nPreprocess işlemleri başlatılıyor :")
+    num_words = 15000 
+    (X_train, Y_train), (X_test, Y_test) = imdb.load_data(num_words=num_words)
+    maxlen = 130
+    X_train = pad_sequences(X_train, maxlen=maxlen)
+    X_test = pad_sequences(X_test, maxlen=maxlen)
+    print("\n\nPreprocess başarı ile tamamlandı..")
+    
+    #BUILDING RECURRENT NEURAL NETWORK :
+    print("\n\nRecurrent Neural Network kuruluyor :")
+    rnn = Sequential() 
+    rnn.add(Embedding(num_words, 32, input_length = len(X_train[0]))) 
+    rnn.add(SimpleRNN(16, input_shape = (num_words, maxlen), return_sequences = False, activation = "relu")) 
+    rnn.add(Dense(1)) 
+    rnn.add(Activation("sigmoid")) 
+    print("\n\n")
+    print(rnn.summary())
+    rnn.compile(loss = "binary_crossentropy", optimizer = "rmsprop", metrics = ["accuracy"])
+    print("\n\nRecurrent Neural Network başarı ile kuruldu..")
+    
+    #TRAINING RECURRENT NEURAL NETWORK :
+    print("\n\nOluşturulan model eğitiliyor :")
+    history = rnn.fit(X_train, Y_train, validation_data = (X_test, Y_test), epochs = 5, batch_size = 128, verbose = 1)
+    score = rnn.evaluate(X_test, Y_test)
+    print("\nEğitim tamamlandı... \nAccuracy : ", score[1]*100)
+    
+    #SONUÇLAR : 
+    print("\n\nSonuçlar şu şekilde : \n\n")
+    plt.figure()
+    plt.plot(history.history["accuracy"], label = "Train")
+    plt.plot(history.history["val_accuracy"], label = "Test")
+    plt.title("Accuracy")
+    plt.xlabel("Accuracy")
+    plt.ylabel("Epochs")
+    plt.legend()
+    plt.show()
+    
+    plt.figure()
+    plt.plot(history.history["loss"], label = "Train")
+    plt.plot(history.history["val_loss"], label = "Test")
+    plt.title("Loss")
+    plt.xlabel("Loss")
+    plt.ylabel("Epochs")
+    plt.legend()
+    plt.show()
+
+"""=========================================================================="""
 
 def main():
-    print("\n\nWelcome to the IMDB Sentiment Analysis!\n\n")
-    
-    print("1 == Veri setini test et. (Dengeli mi?)\n")
-    print("2 == Veri setindeki kelime sayısının histogramını çiz.\n")  
-    print("3 == Kaç farklı kelime var? \n")
-    print("4 == Hangi sayı hangi kelimeye denk geliyor? \n")
-    print("5 == Yorumu metine dönüştür. (List-Comparasion) \n")
+    print("\n\nWelcome to the IMDB Sentiment Analysis!\n")
+    print("\n\nExploratory Data Science :\n")
+    print("\t1 ==> Veri setini test et. (Dengeli mi?)\n")
+    print("\t2 ==> Veri setindeki kelime sayısının histogramını çiz.\n")  
+    print("\t3 ==> Kaç farklı kelime var? \n")
+    print("\t4 ==> Hangi sayı hangi kelimeye denk geliyor? \n")
+    print("\t5 ==> Yorumu metine dönüştür. (List-Comparasion) \n")
+    print("\nMakine Öğrenmesi Aşamaları ve RNN :\n")
+    print("\t6 ==> Modeli eğitmeye başlayın. (Otomatik) \n")
     
     
     number1 = input("What do you want to monitor? : \t")
@@ -127,7 +186,9 @@ def main():
     elif number1 == '5':
         index = int(input("\nHerhangi bir index numarası giriniz : "))
         whatItSay(index)
+    
+    elif number1 == '6':
+        machineLearning()
         
-
 main()
 

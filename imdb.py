@@ -98,8 +98,8 @@ print(len(word_index))
 
 #verilen sayının hangi kelimeye denk geldiğini bulalım : 
 for keys, values in word_index.items(): 
-    if values == 1 : #integer burada veriliyor
-        print(keys)
+    if values == 5 : #integer burada veriliyor
+        print("The integer", values, "corresponds for the word: ", keys)
 
 
 #yorumu metine dönüştürme (list-comparasion method)
@@ -111,7 +111,7 @@ def whatItSay(index): #default olarak 24 verdim
    print(Y_train[index])
    return decode_review
 
-decoded_review = whatItSay(36) # yorum indexi parantezden veriliyor
+decoded_review = whatItSay(39) # yorum indexi parantezden veriliyor
 
 """================================End of EDA================================"""
 
@@ -133,7 +133,7 @@ print(X_train[5])
 for i in X_train[0:10]:
     print(len(i))
     
-decoded_review = whatItSay(5)
+decoded_review = whatItSay(36)
 
 """=========================================================================="""
 

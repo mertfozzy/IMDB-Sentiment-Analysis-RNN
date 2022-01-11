@@ -1,5 +1,7 @@
 # IMDB Sentiment Analysis RNN
- 
+
+![](https://github.com/mertfozzy/IMDB-Sentiment-Analysis-RNN/blob/main/screenshot.png?raw=true)
+
 This project aims to answer some questions about movies and series. 
 
 Using Recurrent Neural Networks, it can classify good or bad user comments, also make graphs according to analysis.

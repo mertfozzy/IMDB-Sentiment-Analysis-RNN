@@ -85,6 +85,21 @@ def hangiKelime():
 
 """=========================================================================="""
 
+def whatItSay(index): 
+   word_index = imdb.get_word_index()
+   reverse_index = dict([(value,key) for (key, value) in word_index.items()])
+   decode_review = " ".join([reverse_index.get(i - 3, "!") for i in X_train[index]])
+   print("\n\nGirdiğiniz index numarasına denk gelen yorum : \n\n", decode_review)
+   
+   if Y_train[index] == 0 :
+       print ("\n\nOlumsuz bir yorum. : " , Y_train[index])
+
+   elif Y_train[index] == 1 :
+       print ("\n\nOlumlu bir yorum. : " , Y_train[index])
+
+
+"""=========================================================================="""
+
 def main():
     print("\n\nWelcome to the IMDB Sentiment Analysis!\n\n")
     
@@ -108,6 +123,10 @@ def main():
         
     elif number1 == '4':
         hangiKelime()
+    
+    elif number1 == '5':
+        index = int(input("\nHerhangi bir index numarası giriniz : "))
+        whatItSay(index)
         
 
 main()

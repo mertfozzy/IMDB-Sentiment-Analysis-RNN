@@ -32,7 +32,6 @@ warnings.filterwarnings("ignore")
 """=========================================================================="""
 
 def testDataset():
-    print("\n\n")
     print("\nX train shape: ", X_train.shape) 
     print("\nY train shape: ", Y_train.shape)
     print("\nY train values : ", np.unique(Y_train))
@@ -43,7 +42,7 @@ def testDataset():
     unique, counts = np.unique(Y_test, return_counts = True)
     print("\nY test distribution: ", dict(zip(unique, counts)))
  
-    print("\n\n")
+    print("\n")
     plt.figure()
     sns.countplot(Y_train)
     plt.xlabel("Classes")
@@ -55,6 +54,10 @@ def testDataset():
     plt.xlabel("Classes")
     plt.ylabel("Frequency")
     plt.title("Y Test")
+    
+    plt.pause(0.05)
+    
+
     
 """=========================================================================="""
 
@@ -69,7 +72,9 @@ def kelimeSayisi():
     sns.distplot(review_len_train, hist_kws = {"alpha" : 0.3})
     sns.distplot(review_len_test, hist_kws = {"alpha" : 0.3})
     
-    print("\n\n")
+    plt.pause(0.05)
+    
+    print("\n")
     print("Train mean : ", np.mean(review_len_train)) 
     print("Train median : ", np.median(review_len_train))
     print("Train mode: ", stats.mode(review_len_train)) 
@@ -77,8 +82,7 @@ def kelimeSayisi():
 """=========================================================================="""
 def kacFarkliKelime():
     word_index = imdb.get_word_index()
-    print("\n\n")
-    print("\n Toplamda ", len(word_index), " farklı kelime var.")
+    print("\n\tToplamda ", len(word_index), " farklı kelime var.")
 
 """=========================================================================="""
 
@@ -97,7 +101,7 @@ def whatItSay(index):
    word_index = imdb.get_word_index()
    reverse_index = dict([(value,key) for (key, value) in word_index.items()])
    decode_review = " ".join([reverse_index.get(i - 3, "!") for i in X_train[index]])
-   print("\n\nGirdiğiniz index numarasına denk gelen yorum : \n\n", decode_review)
+   print("\nGirdiğiniz index numarasına denk gelen yorum : \n\n", decode_review)
    
    if Y_train[index] == 0 :
        print ("\n\nOlumsuz bir yorum. : " , Y_train[index])
@@ -109,7 +113,7 @@ def whatItSay(index):
 """=========================================================================="""
 def machineLearning():
     #PREPROCESS:
-    print("\n\nPreprocess işlemleri başlatılıyor :")
+    print("\n\n==>Preprocess işlemleri başlatılıyor :")
     num_words = 15000 
     (X_train, Y_train), (X_test, Y_test) = imdb.load_data(num_words=num_words)
     maxlen = 130
@@ -118,7 +122,7 @@ def machineLearning():
     print("\n\nPreprocess başarı ile tamamlandı..")
     
     #BUILDING RECURRENT NEURAL NETWORK :
-    print("\n\nRecurrent Neural Network kuruluyor :")
+    print("\n\n==>Recurrent Neural Network kuruluyor :")
     rnn = Sequential() 
     rnn.add(Embedding(num_words, 32, input_length = len(X_train[0]))) 
     rnn.add(SimpleRNN(16, input_shape = (num_words, maxlen), return_sequences = False, activation = "relu")) 
@@ -130,13 +134,13 @@ def machineLearning():
     print("\n\nRecurrent Neural Network başarı ile kuruldu..")
     
     #TRAINING RECURRENT NEURAL NETWORK :
-    print("\n\nOluşturulan model eğitiliyor :")
+    print("\n\n==>Oluşturulan model eğitiliyor :")
     history = rnn.fit(X_train, Y_train, validation_data = (X_test, Y_test), epochs = 5, batch_size = 128, verbose = 1)
     score = rnn.evaluate(X_test, Y_test)
     print("\nEğitim tamamlandı... \nAccuracy : ", score[1]*100)
     
     #SONUÇLAR : 
-    print("\n\nSonuçlar şu şekilde : \n\n")
+    print("\n\n==>Sonuçlar şu şekilde : \n")
     plt.figure()
     plt.plot(history.history["accuracy"], label = "Train")
     plt.plot(history.history["val_accuracy"], label = "Test")
@@ -154,41 +158,46 @@ def machineLearning():
     plt.ylabel("Epochs")
     plt.legend()
     plt.show()
+    
+    plt.pause(0.05)
 
 """=========================================================================="""
 
 def main():
+    
     print("\n\nWelcome to the IMDB Sentiment Analysis!\n")
-    print("\n\nExploratory Data Science :\n")
-    print("\t1 ==> Veri setini test et. (Dengeli mi?)\n")
-    print("\t2 ==> Veri setindeki kelime sayısının histogramını çiz.\n")  
-    print("\t3 ==> Kaç farklı kelime var? \n")
-    print("\t4 ==> Hangi sayı hangi kelimeye denk geliyor? \n")
-    print("\t5 ==> Yorumu metine dönüştür. (List-Comparasion) \n")
-    print("\nMakine Öğrenmesi Aşamaları ve RNN :\n")
-    print("\t6 ==> Modeli eğitmeye başlayın. (Otomatik) \n")
     
-    
-    number1 = input("What do you want to monitor? : \t")
-    
-    if number1 == '1': 
-        testDataset()
-    
-    elif number1 == '2': 
-        kelimeSayisi()
- 
-    elif number1 == '3':
-        kacFarkliKelime()
+    while(1) :
         
-    elif number1 == '4':
-        hangiKelime()
-    
-    elif number1 == '5':
-        index = int(input("\nHerhangi bir index numarası giriniz : "))
-        whatItSay(index)
-    
-    elif number1 == '6':
-        machineLearning()
+        print("\n\nExploratory Data Science :\n")
+        print("\t1 ==> Veri setini test et. (Dengeli mi?)\n")
+        print("\t2 ==> Veri setindeki kelime sayısının histogramını çiz.\n")  
+        print("\t3 ==> Kaç farklı kelime var? \n")
+        print("\t4 ==> Hangi sayı hangi kelimeye denk geliyor? \n")
+        print("\t5 ==> Yorumu metine dönüştür. (List-Comparasion) \n")
+        print("\nMakine Öğrenmesi Aşamaları ve RNN :\n")
+        print("\t6 ==> Modeli eğitmeye başlayın. (Otomatik) \n")
+        
+        number = input("\n----> What do you want to monitor? : \t")
+        
+        if number == '1': 
+            testDataset()
+        
+        elif number == '2': 
+            kelimeSayisi()
+     
+        elif number == '3':
+            kacFarkliKelime()
+            
+        elif number == '4':
+            hangiKelime()
+        
+        elif number == '5':
+            index = int(input("\nHerhangi bir index numarası giriniz : "))
+            whatItSay(index)
+        
+        elif number == '6':
+            machineLearning()
         
 main()
 

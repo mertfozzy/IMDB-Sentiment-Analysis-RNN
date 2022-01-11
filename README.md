@@ -12,11 +12,11 @@ Using Recurrent Neural Networks, it can classify good or bad user comments, also
 
 ## Which operations are available :
 ### Exploratory Data Science :
-- 1. Test the dataset.
-- 2. Draw a graph to show distribution of words in the dataset.
-- 3. How many different words are in the dataset?
-- 4. Which integer corresponds to which word?
-- 5. Convert an index number into corresponded comment text. (Decryption of comment)
+- 1- Test the dataset.
+- 2- Draw a graph to show distribution of words in the dataset.
+- 3- How many different words are in the dataset?
+- 4- Which integer corresponds to which word?
+- 5- Convert an index number into corresponded comment text. (Decryption of comment)
 
 ### Machine Learning :
-- 6. Start to train the model. (When you select that operation, it will start processing automatically. Algorithms will be executed by one by one. You'll be able to see all progress in terminal.)
+- 6- Start to train the model. (When you select that operation, it will start processing automatically. Algorithms will be executed by one by one. You'll be able to see all progress in terminal.)

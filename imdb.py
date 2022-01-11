@@ -143,21 +143,34 @@ decoded_review = whatItSay(36)
 """==========================Recurrent Neural Network========================"""
 
 rnn = Sequential() # layerlar eklenecek
-rnn.add(Embedding(num_words, 32, input_length = len(X_train[0]))) # embeddingi (integerları belirli boyutlarda yoğunluk vektörlerine çevirmeye yarar) ekle
-rnn.add(SimpleRNN(16, input_shape = (num_words, maxlen), return_sequences = False, activation = "relu")) #15K kelimem olucak, maximum 130 kelime olacak
-rnn.add(Dense(1)) # sınıflandırma yapmak için layer ekledik
-rnn.add(Activation("sigmoid")) # binary-classification yapmak için aktivasyon fonksiyonu ekledik
+rnn.add(Embedding(num_words, 32, input_length = len(X_train[0]))) 
+# embedding integerları belirli boyutlarda yoğunluk vektörlerine çevirmeye yarar
+# parametreler : input, output dimension, input length (herhangi bir yorumun uzunluğu olabilir, zaten hepsi 130 olarak ayarlandı)
+
+
+rnn.add(SimpleRNN(16, input_shape = (num_words, maxlen), return_sequences = False, activation = "relu")) 
+# output space boyutu 16,  15K kelimem olucak maximum 130 kelime olacak, 
+
+rnn.add(Dense(1)) # sınıflandırma yapmak için Dense layer ekledik
+
+rnn.add(Activation("sigmoid")) # binary-classification yapmak için sigmoid aktivasyon fonksiyonu ekledik
 
 print(rnn.summary())
 rnn.compile(loss = "binary_crossentropy", optimizer = "rmsprop", metrics = ["accuracy"])
 
-# TRAIN : 
-history = rnn.fit(X_train, Y_train, validation_data = (X_test, Y_test), epochs = 5, batch_size = 128, verbose = 1)
 
 """=========================================================================="""
 
 
 
+
+"""==============================Training RNN================================"""
+# TRAIN code : fit metodu ile X_train ve Y_traini eğitiyoruz, Testler ile validate ediyoruz.
+# epoch : adım sayısıdır. epoch sayısı ne kadar fazla olursa o kadar çok geri dönüp eğitim yapar ve ağırlıkları günceller. epoch sayısı artarsa başarı artar.
+# batch size : zamandan kazanmak için batch size veriyoruz. bu değer modeli küçük parçalara ayırıyor.
+# verbose : bu parametre epochları görmemizi sağlıyor. 1 ise grafik çiziyor.
+# burada trainlerin loss ve acc değerleri + testlerin val_loss ve val_acc değerleri bastırılır
+history = rnn.fit(X_train, Y_train, validation_data = (X_test, Y_test), epochs = 5, batch_size = 128, verbose = 1)
 
 score = rnn.evaluate(X_test, Y_test)
 print("Accuracy : ", score[1]*100)
@@ -165,8 +178,8 @@ print("Accuracy : ", score[1]*100)
 plt.figure()
 plt.plot(history.history["accuracy"], label = "Train")
 plt.plot(history.history["val_accuracy"], label = "Test")
-plt.title("Acc")
-plt.xlabel("Acc")
+plt.title("Accuracy")
+plt.xlabel("Accuracy")
 plt.ylabel("Epochs")
 plt.legend()
 plt.show()
@@ -174,8 +187,8 @@ plt.show()
 plt.figure()
 plt.plot(history.history["loss"], label = "Train")
 plt.plot(history.history["val_loss"], label = "Test")
-plt.title("Acc")
-plt.xlabel("Acc")
+plt.title("Loss")
+plt.xlabel("Loss")
 plt.ylabel("Epochs")
 plt.legend()
 plt.show()
